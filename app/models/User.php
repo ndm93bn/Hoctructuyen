@@ -3,22 +3,37 @@ class User extends Eloquent{
 
     public $table = "users";
 
-    public static function check_login($user_input, $password){
+
+    //Kiem tra dang nhap
+    public static function check_login($username, $password){
 
     	$password = md5(sha1($password));
+        $count = User::where('username', '=', $username)->where('password', '=', $password)->count();
+        if($count >0)
+        {
+            
+             return true;
 
-    	$array1 = array('user_input'=>$user_input);
-    	$rules = array('user_input'=>'email');
+        }
+           
+        else
+            return false;
+    		
+    }
 
-    	if(Validator::make($array1, $rules)->fails())
-    		$check = User::where('username','=',$user_input)->where('password','=',$password)->count();
-    	else
-    		$check = User::where('email','=',$user_input)->where('password','=',$password)->count();
+    //Kiem tra admin dang nhap
+    public static function check_admin_login($username, $password){
+        $password = md5(sha1($password));
+        $count = User::where('username', '=', $username)->where('password', '=', $password)->where('level','>',1)->count();
+        if($count >0)
+        {
+            
+             return true;
 
-    	if($check >0)
-    		return true;
-    	else
-    		return false;
+        }
+           
+        else
+            return false;
     }
 
     public static function check_username($username){

@@ -1,1 +1,21 @@
-﻿
+﻿/* Style main */
+body{
+	color: #7c8082;
+	background-color:#ccc;
+	
+}
+a{
+	color:green;
+}
+.container{
+	background-color: #fff;
+}
+.page-title{
+	color: green;
+}
+
+.description{
+	background-color:#ebebeb;
+	border-radius:5px;
+	padding: 5px;  
+}
